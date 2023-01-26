@@ -15,4 +15,27 @@
     </ion-row>
   </ion-grid>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit Currencies</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Currency 1</ion-label>
+        <ion-input value="USD" disabled="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Currency 2</ion-label>
+        <ion-select #c2 value="TND">
+          <ion-select-option *ngFor="let curr of tabCurrencies" [value]="curr">{{ curr }} </ion-select-option>
+
+        </ion-select>
+      </ion-item>
+      <ion-button (click)="onConvert(c2.value)" color="success" expand="block">Convert</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="message.length" class="ion-margin">
+    <strong> Today, 1 american Dollar worths {{ message }} {{ c2.value }} </strong>
+  </div>
+
 </ion-content>

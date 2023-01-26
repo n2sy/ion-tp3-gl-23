@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  link =
+    'http://apilayer.net/api/live?access_key=7b239b58f93255b5ef5795cdc77cee8c';
+  tabCurrencies = ['EUR', 'TND', 'GBP', 'JPY', 'CNY'];
+  message = '';
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
-
+  onConvert(curr2: any) {
+    let chaine = `USD${curr2}`;
+    this.http.get(this.link).subscribe({
+      next: (response: any) => {
+        console.log(response['quotes'][chaine]);
+        this.message = `${response['quotes'][chaine]}`;
+      },
+    });
+  }
 }
