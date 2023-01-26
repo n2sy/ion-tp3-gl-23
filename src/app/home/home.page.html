@@ -26,7 +26,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Currency 2</ion-label>
-        <ion-select #c2 value="TND">
+        <ion-select (ionChange)="onConvert(c2.value)" #c2 value="TND">
           <ion-select-option *ngFor="let curr of tabCurrencies" [value]="curr">{{ curr }} </ion-select-option>
 
         </ion-select>

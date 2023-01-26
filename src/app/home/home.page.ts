@@ -13,11 +13,22 @@ export class HomePage {
   message = '';
   constructor(private http: HttpClient) {}
 
+  ngOnInit() {
+    this.tabCurrencies = [];
+    this.http.get(this.link).subscribe({
+      next: (response: any) => {
+        for (const key in response['quotes']) {
+          this.tabCurrencies.push(key.slice(3));
+        }
+      },
+    });
+  }
+
   onConvert(curr2: any) {
     let chaine = `USD${curr2}`;
     this.http.get(this.link).subscribe({
       next: (response: any) => {
-        console.log(response['quotes'][chaine]);
+        console.log(response['quotes']);
         this.message = `${response['quotes'][chaine]}`;
       },
     });
